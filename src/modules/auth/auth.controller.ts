@@ -1,6 +1,6 @@
 import { Body, Controller, Inject, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { DefaultPost } from "src/base/controller/base.controller";
-import { AUTH_SERVICE_NAME, AuthServiceClient, LoginResponse } from './auth.pb';
+import { AUTH_SERVICE_NAME, AuthServiceClient } from './auth.pb';
 import { ClientGrpc } from '@nestjs/microservices';
 import { LoginRequestDto, RegisterRequestDto } from './dto/auth.dto';
 

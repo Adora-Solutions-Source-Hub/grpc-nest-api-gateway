@@ -5,16 +5,21 @@ import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-    private svc: AuthServiceClient;
+    private authClient: AuthServiceClient;
 
     @Inject(AUTH_SERVICE_NAME)
-    private readonly client: ClientGrpc;
+    private readonly grpcClient: ClientGrpc;
 
     public onModuleInit(): void {
-        this.svc = this.client.getService<AuthServiceClient>(AUTH_SERVICE_NAME);
+        this.authClient = this.grpcClient.getService<AuthServiceClient>(AUTH_SERVICE_NAME);
     }
 
-    public async validate(token: string): Promise<ValidateResponse> {
-        return firstValueFrom(this.svc.validate({ token }));
+    public async validate(token: string) {
+        console.log("🚀 ~ AuthService ~ validate ~ token:", token)
+        const payload = { token }
+        const rs = await this.authClient.validate(payload).toPromise();
+        console.log("🚀 ~ AuthService ~ validate ~ rs:", rs)
+        return rs;
+        // return firstValueFrom(rs.data);
     }
 }

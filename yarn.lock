@@ -2981,9 +2981,9 @@ graphemer@^1.4.0:
   resolved "https://registry.yarnpkg.com/graphemer/-/graphemer-1.4.0.tgz#fb2f1d55e0e3a1849aeffc90c4fa0dd53a0e66c6"
   integrity sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==
 
-"grpc-nest-proto@https://github.com/chiphan2008/grpc-nest-proto.git":
+"grpc-nest-proto@https://github.com/Adora-Solutions-Source-Hub/gRPC-Nest-Proto.git":
   version "1.0.0"
-  resolved "https://github.com/chiphan2008/grpc-nest-proto.git#adc4a5cd9c6af3a058cc366893964cac026d4924"
+  resolved "https://github.com/Adora-Solutions-Source-Hub/gRPC-Nest-Proto.git#221ab78222e5507bf8aebdde1651fc557ec51cd0"
 
 has-flag@^4.0.0:
   version "4.0.0"

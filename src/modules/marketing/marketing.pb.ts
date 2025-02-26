@@ -10,33 +10,80 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "marketing";
 
-export interface CreateMarketingRequest {
-  productId: number;
-  quantity: number;
+/** Research Metadata */
+export interface CreateResearchMetadataRequest {
+  id: number;
+}
+
+export interface CreateResearchMetadataResponse {
+  status: number;
+  error: string[];
+  researchMetadata: CreateResearchMetadataRequest | undefined;
+}
+
+/** Brief */
+export interface CreateBriefRequest {
+  id: number;
+  name: string;
+  field: string;
+  website: string;
+  productName: string;
+  marketLocation: string;
+  projectDescription: string;
+  clientName: string;
+  brandName: string;
+  campaignStart: string;
+  campaignEnd: string;
+  targetAudience: string[];
+}
+
+export interface CreateBriefResponse {
+  status: number;
+  error: string[];
+  brief: CreateBriefRequest | undefined;
+}
+
+export interface CreateCampaignRequest {
+  name: string;
   userId: number;
 }
 
-export interface CreateMarketingResponse {
+export interface CreateCampaignResponse {
   status: number;
   error: string[];
-  id: number;
+  campaign: CreateCampaignRequest | undefined;
 }
 
 export const MARKETING_PACKAGE_NAME = "marketing";
 
 export interface MarketingServiceClient {
-  createMarketing(request: CreateMarketingRequest): Observable<CreateMarketingResponse>;
+  createCampaign(request: CreateCampaignRequest): Observable<CreateCampaignResponse>;
+
+  createBrief(request: CreateBriefRequest): Observable<CreateBriefResponse>;
+
+  createResearchMetadata(request: CreateResearchMetadataRequest): Observable<CreateResearchMetadataResponse>;
 }
 
 export interface MarketingServiceController {
-  createMarketing(
-    request: CreateMarketingRequest,
-  ): Promise<CreateMarketingResponse> | Observable<CreateMarketingResponse> | CreateMarketingResponse;
+  createCampaign(
+    request: CreateCampaignRequest,
+  ): Promise<CreateCampaignResponse> | Observable<CreateCampaignResponse> | CreateCampaignResponse;
+
+  createBrief(
+    request: CreateBriefRequest,
+  ): Promise<CreateBriefResponse> | Observable<CreateBriefResponse> | CreateBriefResponse;
+
+  createResearchMetadata(
+    request: CreateResearchMetadataRequest,
+  ):
+    | Promise<CreateResearchMetadataResponse>
+    | Observable<CreateResearchMetadataResponse>
+    | CreateResearchMetadataResponse;
 }
 
 export function MarketingServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["createMarketing"];
+    const grpcMethods: string[] = ["createCampaign", "createBrief", "createResearchMetadata"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("MarketingService", method)(constructor.prototype[method], method, descriptor);
