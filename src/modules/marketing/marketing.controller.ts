@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, OnModuleInit, UseGuards } from '@nestjs/common';
+import { Body, Controller, Inject, OnModuleInit, Req, UseGuards } from '@nestjs/common';
 import { CreateCampaignResponse, MARKETING_SERVICE_NAME, MarketingServiceClient } from './marketing.pb';
 import { ClientGrpc } from '@nestjs/microservices';
 import { DefaultPost } from 'src/base/controller/base.controller';
@@ -18,11 +18,10 @@ export class MarketingController implements OnModuleInit {
         this.marketingClient = this.client.getService<MarketingServiceClient>(MARKETING_SERVICE_NAME);
     }
 
-
     @DefaultPost("/campaign")
     @UseGuards(AuthGuard)
-    private async createCampaign(@Body() body: CreateCampaignDto): Promise<Observable<CreateCampaignResponse>> {
-        console.log("🚀 ~ MarketingController ~ createCampaign ~ body:", body)
-        return this.marketingClient.createCampaign(body);
+    private async createCampaign(@Req() req, @Body() body: CreateCampaignDto): Promise<Observable<CreateCampaignResponse>> {
+        console.log("🚀 ~ MarketingController ~ createCampaign ~ body:", body, req.user)
+        return this.marketingClient.createCampaign({ ...body, userId: req.user });
     }
 }
