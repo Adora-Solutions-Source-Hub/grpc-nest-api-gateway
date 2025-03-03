@@ -18,9 +18,21 @@ export interface RegisterRequest {
   avatar: string;
 }
 
+export interface UserRes {
+  email: string;
+  name: string;
+  phone: string;
+  avatar: string;
+  uid: string;
+  role: string;
+  emailVerifiedAt: string;
+  googleId: string;
+}
+
 export interface RegisterResponse {
   status: number;
   error: string[];
+  data?: UserRes | undefined;
 }
 
 export interface TokenJson {

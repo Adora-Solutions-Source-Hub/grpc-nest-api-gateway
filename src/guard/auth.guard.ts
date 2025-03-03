@@ -1,5 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext, HttpStatus, UnauthorizedException, Inject } from '@nestjs/common';
-import { ValidateResponse } from 'src/modules/auth/auth.pb';
+import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, Inject } from '@nestjs/common';
 import { AuthService } from 'src/modules/auth/auth.service';
 
 @Injectable()

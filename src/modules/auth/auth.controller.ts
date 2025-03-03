@@ -19,9 +19,12 @@ export class AuthController implements OnModuleInit {
     private async register(@Body() body: RegisterRequestDto) {
         console.log("🚀 ~ AuthController ~ register ~ body:", body)
         try {
-            return await this.authClient.register(body).toPromise();
+            const { data, status, error } = await this.authClient.register(body).toPromise();
+            console.log("🚀 ~ AuthController ~ register ~ data, error, status:", data, status)
+            return { data, status, message: error };
         } catch (err: any) {
             console.log("🚀 ~ AuthController ~ register ~ err:", err)
+            return err
         }
     }
 
