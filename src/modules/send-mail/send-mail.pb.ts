@@ -17,7 +17,7 @@ export interface SendMailRequest {
 }
 
 export interface SendMailRes {
-  otp: string;
+  message: string;
 }
 
 export interface SendMailResponse {
